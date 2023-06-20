@@ -28,6 +28,21 @@ pipeline {
                 sh "mvn verify -DskipUnitTests"
             }
         }
+
+        stage('Build & sonarqube analysis') {
+            steps{
+                withSonarQubeEnv(credentialsId: 'sonar_auth') {
+                  sh "mvn clean package sonar:sonar"
+                }
+            }
+        }
+
+        stage('Sonar Quality gates') {
+            steps{
+                
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar_auth',installationName: 'sonarqube'
+            }
+        }
     }
     post {
         success{
