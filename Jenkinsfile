@@ -39,8 +39,8 @@ pipeline {
 
         stage('Sonar Quality gates') {
             steps{
-                
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar_auth',installationName: 'sonarqube'
+
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar_auth'
             }
         }
     }
