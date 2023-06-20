@@ -43,7 +43,27 @@ pipeline {
                 waitForQualityGate abortPipeline: false, credentialsId: 'sonar_auth'
             }
         }
-    }
+
+        stage('Uploading the artifact into nexus') {
+            steps{
+                nexusArtifactUploader artifacts:
+                 [
+                    [
+                        artifactId: 'spring-boot-mongo',
+                        classifier: '',
+                        file: 'target/*.jar',
+                        type: 'jar'
+                    ]
+                ],
+                credentialsId: 'Nexus_crd',
+                groupId: ' com.mt',
+                nexusUrl: '3.111.40.43:8081',
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                repository: 'springapp-release',
+                version: '1.0'
+            }
+        }
     post {
         success{
             sendSlackNotifications(currentBuild.result)
