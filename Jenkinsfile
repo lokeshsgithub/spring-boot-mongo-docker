@@ -51,7 +51,7 @@ pipeline {
                     [
                         artifactId: 'spring-boot-mongo',
                         classifier: '',
-                        file: 'target/*.jar',
+                        file: 'target/spring-boot-mongo*.jar',
                         type: 'jar'
                     ]
                 ],
