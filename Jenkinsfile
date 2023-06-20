@@ -44,7 +44,7 @@ pipeline {
             }
         }
 
-        stage('Uploading the artifact into nexus') {
+        /*stage('Uploading the artifact into nexus') {
             steps{
                 nexusArtifactUploader artifacts:
                  [
@@ -61,7 +61,14 @@ pipeline {
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'springapp-release',
-                version: '2.1.5.RELEASE'
+                version: '2.1.5.'
+            }
+        }*/
+
+        stage('Docker Build image') {
+            steps{
+                sh "docker image build -t $JOB_NAME/$BUILD_TAG ."
+                
             }
         }
     }
