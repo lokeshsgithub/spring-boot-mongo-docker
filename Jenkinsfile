@@ -76,18 +76,15 @@ pipeline {
 
         stage('Push the image into dockerhub') {
             steps{
-                script{
-                    """
                      withCredentials([string(credentialsId: 'dockerhub_auth', variable: 'dockerhub_pwd')]) {
-                        docker login -u lokeshsdockerhub --password ${dockerhub_pwd}
-                        docker push lokeshsdockerhub/$JOB_NAME:$BUILD_TAG
-                        docker push lokeshsdockerhub/$JOB_NAME:latest
+                     sh "docker login -u lokeshsdockerhub --password ${dockerhub_pwd}"
+                     sh "docker push lokeshsdockerhub/$JOB_NAME:$BUILD_TAG"
+                     sh "docker push lokeshsdockerhub/$JOB_NAME:latest"
                      }
-                    """
+                    
                 }
             }
         }
-    }
     post {
         success{
             sendSlackNotifications(currentBuild.result)
