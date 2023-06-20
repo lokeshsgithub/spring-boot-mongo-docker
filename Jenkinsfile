@@ -64,6 +64,7 @@ pipeline {
                 version: '1.0'
             }
         }
+    }
     post {
         success{
             sendSlackNotifications(currentBuild.result)
