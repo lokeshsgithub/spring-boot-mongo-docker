@@ -56,7 +56,7 @@ pipeline {
                     ]
                 ],
                 credentialsId: 'Nexus_crd',
-                groupId: ' com.mt',
+                groupId: 'com.mt',
                 nexusUrl: '3.111.40.43:8081',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
