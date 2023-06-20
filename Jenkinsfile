@@ -1,5 +1,6 @@
 @Library('lokisharedlibs') _
 pipeline {
+    agent any
 
     stages{
 
