@@ -31,7 +31,7 @@ pipeline {
 
         stage('Build & sonarqube analysis') {
             steps{
-                withSonarQubeEnv(credentialsId: 'sonar_auth') {
+                withSonarQubeEnv(credentialsId: 'sonar_auth',installationName: 'sonarqube') {
                   sh "mvn clean package sonar:sonar"
                 }
             }
@@ -40,7 +40,7 @@ pipeline {
         stage('Sonar Quality gates') {
             steps{
 
-                waitForQualityGate abortPipeline: false, credentialsId: 'sonar_auth'
+                waitForQualityGate abortPipeline: false, credentialsId: 'sonar_auth',installationName: 'sonarqube'
             }
         }
     }
