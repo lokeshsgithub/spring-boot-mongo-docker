@@ -5,9 +5,10 @@ pipeline {
 
         stage('Checkout code'){
             steps{
+                sendSlackNotifications('STARTED')
                 git credentialsId: 'Jenkins_Github_crd',
                 url: ' https://github.com/lokeshsgithub/spring-boot-mongo-docker.git'
-                sendSlackNotifications('STARTED')
+                
             }
         }
     }
