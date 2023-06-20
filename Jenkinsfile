@@ -22,6 +22,12 @@ pipeline {
                 sh "mvn test"
             }
         }
+
+        stage('Integrate maven test cases') {
+            steps{
+                sh "mvn verify -DskipUnitTests"
+            }
+        }
     }
     post {
         success{
