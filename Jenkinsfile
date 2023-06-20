@@ -49,19 +49,19 @@ pipeline {
                 nexusArtifactUploader artifacts:
                  [
                     [
-                        artifactId: 'spring-boot-mongo',
+                        artifactId: 'spring-boot-starter-parent',
                         classifier: '',
                         file: 'target/spring-boot-mongo*.jar',
                         type: 'jar'
                     ]
                 ],
                 credentialsId: 'Nexus_crd',
-                groupId: 'com.mt',
+                groupId: 'org.springframework.boot',
                 nexusUrl: '3.111.40.43:8081',
                 nexusVersion: 'nexus3',
                 protocol: 'http',
                 repository: 'springapp-release',
-                version: '1.0'
+                version: '2.1.5.RELEASE'
             }
         }
     }
