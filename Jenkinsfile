@@ -67,9 +67,9 @@ pipeline {
 
         stage('Docker Build image') {
             steps{
-                sh "docker image build -t $JOB_NAME/$BUILD_TAG ."
-                sh "docker image tag $JOB_NAME/$BUILD_TAG lokeshsdockerhub/$JOB_NAME:$BUILD_TAG"
-                sh "docker image tag $JOB_NAME/$BUILD_TAG lokeshsdockerhub/$JOB_NAME:latest"
+                sh "docker image build -t $JOB_NAME/$BUILD_NUMBER ."
+                sh "docker image tag $JOB_NAME/$BUILD_NUMBER lokeshsdockerhub/$JOB_NAME:$BUILD_NUMBER"
+                sh "docker image tag $JOB_NAME/$BUILD_NUMBER lokeshsdockerhub/$JOB_NAME:latest"
                 
             }
         }
@@ -78,7 +78,7 @@ pipeline {
             steps{
                      withCredentials([string(credentialsId: 'dockerhub_auth', variable: 'dockerhub_pwd')]) {
                      sh "docker login -u lokeshsdockerhub --password ${dockerhub_pwd}"
-                     sh "docker push lokeshsdockerhub/$JOB_NAME:$BUILD_TAG"
+                     sh "docker push lokeshsdockerhub/$JOB_NAME:$BUILD_NUMBER"
                      sh "docker push lokeshsdockerhub/$JOB_NAME:latest"
                      }
                     
